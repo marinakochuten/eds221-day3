@@ -1,0 +1,212 @@
+---
+title: "EDS 221 day 3 practice"
+format: html
+editor_options: 
+  chunk_output_type: console
+---
+
+# Logicals 
+
+```{r}
+pinyon_pine <- 14
+lodgepole_pine <- 46
+
+# some logical expressions ----
+pinyon_pine == 10   # is pinyon_pine equal to 10?
+pinyon_pine < lodgepole_pine   # is pinyon_pine less than lodgepole?
+pinyon_pine != 25   # is pinyon pine not equal to 25?
+```
+
+# Conditionals
+
+```{r}
+burrito <- 2.4   # assign a value to an item
+
+# write a short 'if' statement
+if (burrito > 2) {
+  print("I love burritos!")
+}
+```
+
+```{r}
+pika <- 89.1
+
+# write a 'if-else' statement
+if (pika > 60) {
+  print("mega pika!")
+} else
+  print("normal pika")
+```
+
+```{r}
+marmot <- 2.8
+
+# 'if-else if-else' statement
+if (marmot < 0.5) {
+  print("a small marmot")
+} else if (marmot >= 0.5 & marmot < 3) {
+  print("a medium marmot")
+} else
+  print("a large marmot")
+```
+
+```{r}
+library(stringr)
+
+my_ships <- c("Millenium Falcon",
+              "X-wing",
+              "Tie-Fighter",
+              "Death Star")
+str_detect(string = my_ships, pattern = "r")
+```
+
+```{r}
+phrase <- "I love burritos"
+
+if (str_detect(string = phrase, pattern = "love")) {
+  print("burrito fan!")
+}
+```
+
+```{r}
+species <- "mouse"
+
+switch(species,
+       "cat" = print("meow"),
+       "dog" = print("woof"),
+       "mouse" = print("squeak"))
+
+# switch is a more effifienct way to do "if-else if-else" statements
+
+if (species == "dog") {
+  print("woof")
+} else if (species == "cat") {
+  print("meow")
+} else if (species == "mouse")
+  print("squeak")
+
+# this does the same thing as the switch function, just more complicated
+```
+
+# Intro to for loops
+
+```{r}
+rm(list = ls())
+dog_names <- c("Teddy", "Khora", "Banjo", "Waffle")
+
+for (pupster in dog_names) {   # this is the sequence
+  print(paste0("My dog's name is ", pupster, "."))   # this is the body
+}
+```
+
+```{r}
+mass <- seq(from = 0, to = 3, by = 0.5)
+
+# work out what you want in the body of your for loop
+mass_1 <- mass[1]
+new_value <- mass_1 + 2
+print(new_value)
+
+# put into for loop
+for (i in mass) {
+  new_value <- i + 2
+  print(new_value)
+}
+```
+
+```{r}
+# above in a slightly different format
+
+mass <- seq(from = 0, to = 3, by = 0.5)
+
+for (i in seq_along(mass)) {
+  new_value <- mass[i] + 2
+  print(new_value)
+}
+```
+
+```{r}
+rm(list = ls())
+
+tree_height <- c(1, 2, 6, 10)
+
+for (i in seq_along(tree_height)) {
+  new_value <- tree_height[i] + tree_height[i + 1]
+  print(new_value)
+}
+```
+
+# For loops with conditionals
+
+```{r}
+animals <- c("cat", "dog", "dog", "zebra", "dog")
+
+for (i in seq_along(animals)) {
+  if (animals[i] == "dog") {
+    print("I love dogs")
+  } else
+    print("this is not a dog")
+}
+```
+
+```{r}
+species <- c("dog", "elephant", "goat", "dog", "dog", "elephant")
+
+age_human <- c(3, 8, 4, 6, 12, 18)
+
+for (i in seq_along(species)) {
+  if (species[i] == "dog") {
+  animal_age <- age_human[i] * 7
+} else if (species[i] == "elephant") {
+  animal_age <- age_human[i] * 0.88
+} else if (species [i] == "goat") {
+  animal_age <- age_human[i] * 4.7
+} 
+  print(animal_age)
+}
+
+```
+
+# Storing the outputs of for loops
+
+```{r}
+# assign info to some items
+species <- c("dog", "elephant", "goat", "dog", "dog", "elephant")
+
+age_human <- c(3, 8, 4, 6, 12, 18)
+
+# create an empty vector for animal ages
+animal_ages <- vector(mode = "numeric", length = length(species))
+
+# write your for loop
+for (i in seq_along(species)) {
+  if (species[i] == "dog") {
+  animal_age <- age_human[i] * 7
+} else if (species[i] == "elephant") {
+  animal_age <- age_human[i] * 0.88
+} else if (species [i] == "goat") {
+  animal_age <- age_human[i] * 4.7
+} 
+  animal_ages[i] <- animal_age   # this is where you're telling r where to store the output of the loop, rather than saying print
+}
+
+```
+
+```{r}
+tigers <- c(29, 34, 82)
+lions <- c(2, 18, 6)
+
+big_cats <- vector(mode = "numeric", length = length(tigers))
+
+for (i in seq_along(tigers)) {   # for each value in this sequence
+  total_cats <- tigers[i] + lions [i]   # do this
+  big_cats[i] <- total_cats   # and save it here
+}
+
+```
+
+
+
+
+
+
