@@ -205,6 +205,58 @@ for (i in seq_along(tigers)) {   # for each value in this sequence
 
 ```
 
+# for loops with data frames
+
+```{r}
+# make an empty vector as a placeholder for output of for loop
+mean_mtcars <- vector(mode = "numeric", length = ncol(mtcars))
+
+for (i in 1:ncol(mtcars)) {
+  mean_value <- mean(mtcars[[i]], na.rm = TRUE)
+  mean_mtcars[i] <- mean_value
+}
+```
+
+```{r}
+
+#library(palmerpenguins)
+
+for (i in seq_along(penguins)) {
+  if (is.numeric(penguins[[i]])) {
+    
+  penguin_median <- median(penguins[[i]], na.rm = TRUE)
+  print(penguin_median)
+  
+} else {
+  print("non-numeric column")
+}
+}
+```
+
+# apply()
+
+```{r}
+apply(X = mtcars, MARGIN = 2, FUN = mean) # for the array mtcars, apply the function mean across all columns. does the same thing as above, but way easier
+```
+
+```{r}
+library(tidyverse)
+
+penguins |>
+  group_by(species) |>
+  summarise(across(where(is.numeric), mean, na.rm = TRUE))
+```
+
+# {purrr}
+
+```{r}
+library(purrr)
+
+map(.x = mtcars, .f = mean)
+map_df(.x = mtcars, .f = mean)
+
+```
+
 
 
 
